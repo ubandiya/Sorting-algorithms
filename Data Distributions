@@ -1,0 +1,74 @@
+#include <iostream>
+#include <vector>
+#include <algorithm> // for std::sort
+#include <cstdlib>   // for rand() and srand()
+#include <ctime>     // for time()
+
+using namespace std;
+
+// Function to generate random data
+vector<int> generateRandomData(int size)
+{
+    vector<int> data(size);
+    for (int i = 0; i < size; ++i)
+    {
+        data[i] = rand() % 1000; // Generate a random integer between 0 and 999
+    }
+    return data;
+}
+
+// Function to generate partially sorted data
+vector<int> generatePartiallySortedData(int size)
+{
+    vector<int> data = generateRandomData(size);
+    // Sort only a portion of the data
+    sort(data.begin(), data.begin() + size / 2);
+    return data;
+}
+
+// Function to generate inversely sorted data
+vector<int> generateInverselySortedData(int size)
+{
+    vector<int> data = generateRandomData(size);
+    sort(data.rbegin(), data.rend()); // Sort in descending order
+    return data;
+}
+
+int main()
+{
+    // Seed the random number generator
+    srand(time(NULL));
+
+    int size;
+    cout << "Enter the size of the data: ";
+    cin >> size;
+
+    // Generate and print random data
+    cout << "Random Data:" << endl;
+    vector<int> randomData = generateRandomData(size);
+    for (int num : randomData)
+    {
+        cout << num << " ";
+    }
+    cout << endl << endl;
+
+    // Generate and print partially sorted data
+    cout << "Partially Sorted Data:" << endl;
+    vector<int> partiallySortedData = generatePartiallySortedData(size);
+    for (int num : partiallySortedData)
+    {
+        cout << num << " ";
+    }
+    cout << endl << endl;
+
+    // Generate and print inversely sorted data
+    cout << "Inversely Sorted Data:" << endl;
+    vector<int> inverselySortedData = generateInverselySortedData(size);
+    for (int num : inverselySortedData)
+    {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
