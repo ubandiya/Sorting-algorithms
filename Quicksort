@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to partition the array
+int partition(vector<int>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j <= high - 1; ++j) {
+        if (arr[j] < pivot) {
+            ++i;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+// Function to perform quicksort
+void quickSort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    int size;
+    cout << "Enter the size of the array: ";
+    cin >> size;
+
+    vector<int> data(size);
+
+    cout << "Enter " << size << " elements of the array:\n";
+    for (int i = 0; i < size; ++i) {
+        cin >> data[i];
+    }
+
+    // Print original data
+    cout << "Original data: ";
+    for (int num : data) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // Sort data using quicksort
+    quickSort(data, 0, size - 1);
+
+    // Print sorted data
+    cout << "Sorted data: ";
+    for (int num : data) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
