@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <time.h>
 
 using namespace std;
 
@@ -71,7 +72,13 @@ int main() {
     cout << endl;
 
     // Sort data using merge sort
+    clock_t start, end;
+    start = clock();
     mergeSort(data, 0, size - 1);
+    end = clock();
+
+    double elapsed = double(end - start) / CLOCKS_PER_SEC * 1000.0;
+    std::cout << "Merge Sort took " << elapsed << " ms" << std::endl;
 
     // Print sorted data
     cout << "Sorted data: ";
